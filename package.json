@@ -9,7 +9,7 @@
         "dev": "webpack-dev-server --open --inline --hot --env.development",
         "watch": "webpack --watch"
     },
-    "author": "",
+    "author": "UShow Jack",
     "license": "ISC",
     "devDependencies": {
         "babel-core": "^6.25.0",
