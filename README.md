@@ -1,6 +1,8 @@
 # screen-console
 Use for the device, which can't offer the console.I am at work, often on television for development, but the TV on the browser without a console.No console, led to the development of debugging bug is the biggest challenge.This time you need to write a console, the browser directly shows the results we want to print, or even V8 engine reported the wrong.So I wrote this plugin to implement this feature.
 
+![screen-console](http://upload-images.jianshu.io/upload_images/4415565-7ae3ab168afa65ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ### How to import
 You can download the zip file via github and introduce ./dist/js/index.js in HTML.
 As follows:
@@ -32,7 +34,6 @@ screenConsole.init();
 screenConsole.log(1);
 screenConsole.error(1);
 screenConsole.info(1);
-screenConsole.clear(1);
 screenConsole.warn(1);
 
 /**
