@@ -16,11 +16,11 @@ const extractCSS = new ExtractTextPlugin({
 });
 
 const config = {
-    entry: './static/script/index.js',
+    entry: './static/script/main.js',
     output: {
         path: path.join(__dirname, 'dist'),
         publicPath: './',
-        filename: 'js/index.js'
+        filename: 'js/index[hash].js'
     },
     devtool: 'inline-source-map',
     devServer: {
