@@ -223,8 +223,8 @@ class ScreenConsole {
      * @returns 
      * @memberof ScreenConsole
      */
-    proxyPress(keyString, callback) {
-        const press = new proxyPress(keyString, callback);
+    proxyPress(type, rule, callback) {
+        const press = new proxyPress(type, rule, callback);
         return press;
     }
 

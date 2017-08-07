@@ -20,7 +20,7 @@ const config = {
     output: {
         path: path.join(__dirname, 'dist'),
         publicPath: './',
-        filename: 'js/index[hash].js'
+        filename: 'js/index.js'
     },
     devtool: 'inline-source-map',
     devServer: {
