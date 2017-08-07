@@ -37,20 +37,31 @@ screenConsole.info(1);
 screenConsole.warn(1);
 
 /**
- * @description Add the event to use some function.And the keydown is less 300ms.
+ * @description 代理按键组合
  * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
  * @param {any} callback 
- * @param {any} string format is 'keycode1+keycode2+keycode3+keycode4'
  */
-window.a = screenConsole.proxyPress('49+49', () => {
+
+/**
+ * @description 
+ * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
+ * @param {any} string 格式 keydown/'a+b+c+d' or click/5
+ */
+/**
+ * @description 
+ * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
+ * @param {any} type 'click'/'keydown' default is keydown.
+ */
+
+window.a = screenConsole.proxyPress('keydown','49+49', () => {
     // Make the console show.
     screenConsole.consoleShow();
 });
-window.b = screenConsole.proxyPress('50+50', () => {
+window.b = screenConsole.proxyPress('keydown','50+50', () => {
     // Make the console hide.    
     screenConsole.consoleHide();
 });
-window.c = screenConsole.proxyPress('51+51', () => {
+window.c = screenConsole.proxyPress('click',2, () => {
     // Make the console clear.
     screenConsole.clear();
 });
