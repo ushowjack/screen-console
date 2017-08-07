@@ -69,7 +69,7 @@ class proxyPress {
 
         document.addEventListener('click', this.keyEvent, false);
     }
-    removeKeydownEvent() {
+    removeEvent() {
         if (!this.keyEvent) {
             return false;
         }
