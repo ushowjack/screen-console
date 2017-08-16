@@ -89,6 +89,7 @@ warn(msg);
 error(msg);
 info();
 
+scrollToggle();
 clear(msg);
 destroy();
 

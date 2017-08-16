@@ -56,29 +56,32 @@ class ScreenConsole {
         });
         this.saveConsoleFn();
         this.$console.innerHTML = this.$consoleVirtualList;
+
+        // If isShow is true, make the console show
+        if (this._options.isShow) {
+            this.consoleShow();
+        }
     }
 
     // 保存console的方法
     saveConsoleFn() {
-        const originalFnCallDecorator = this.originalFnCallDecorator;
-
+        const originalFnCallDecorator = this.originalFnCallDecorator.bind(this);
         this._console.log = console.log;
         this._console.clear = console.clear;
         this._console.info = console.info;
         this._console.warn = console.warn;
         this._console.error = console.error;
-
-        console.log = this.originalFnCallDecorator(this.log, 'log');
-        console.clear = this.originalFnCallDecorator(this.clear, 'clear');
-        console.info = this.originalFnCallDecorator(this.info, 'info');
-        console.warn = this.originalFnCallDecorator(this.warn, 'warn');
-        console.error = this.originalFnCallDecorator(this.error, 'error');
+        // 使得console也能使用本实例的apis
+        console.log = originalFnCallDecorator(this.log, 'log');
+        console.clear = originalFnCallDecorator(this.clear, 'clear');
+        console.info = originalFnCallDecorator(this.info, 'info');
+        console.warn = originalFnCallDecorator(this.warn, 'warn');
+        console.error = originalFnCallDecorator(this.error, 'error');
     }
 
     // console原生和包装方法一起用
     originalFnCallDecorator(fn, fnName) {
         const _self = this;
-
         return function() {
             fn.apply(_self, arguments);
             // debugger
@@ -86,6 +89,15 @@ class ScreenConsole {
                 _self._console[fnName].apply(console, arguments);
             }
         };
+    }
+
+    // To add the log exports.
+    extendsExport(fn) {
+        const _self = this;
+        this.genericLogger = function() {
+            fn.apply(_self, arguments[1]);
+            _self.genericLogger.apply(_self, arguments);
+        }
     }
 
 
@@ -97,9 +109,6 @@ class ScreenConsole {
     consoleShow() {
         if (!this.$console) {
             return false;
-        }
-        if (this._options.isShow) {
-            return true;
         }
         this._options.isShow = true;
         const consoleDOM = document.querySelector('.console');
@@ -124,12 +133,15 @@ class ScreenConsole {
      * @memberof ScreenConsole
      */
     consoleHide() {
+        //To prevent consoleHide from using the two times, causing the log to be lost        
         if (!this._options.isShow) {
             return false;
         }
         this._options.isShow = false;
         this.$console.style.display = 'none';
         this.$consoleVirtualList = '';
+
+        return false;
     }
 
     /**
@@ -142,8 +154,6 @@ class ScreenConsole {
         this._options.isScrollToBack = !this._options.isScrollToBack;
         return this._options.isScrollToBack;
     }
-
-
 
     /**
      * @description 用于摧毁整个控制台，但是仍然可以使用该实例，只是清空dom而已
@@ -251,17 +261,31 @@ class ScreenConsole {
         }
     }
 
+
+    // Converts a parameter to a string.
+    valtoString(val) {
+        let text = ''
+        for (let i = 0; i < arguments.length; i++) {
+            typeof arguments[i] == 'object' ? text += JSON.stringify(arguments[i]) : text += arguments[i];
+        }
+        return text;
+    }
+
     // console的各大方法
-    log(val) {
+    log() {
+        const val = this.valtoString.apply(this, arguments);
         this.genericLogger('log', val);
     }
-    info(val) {
+    info() {
+        const val = this.valtoString.apply(this, arguments);
         this.genericLogger('info', val);
     }
-    warn(val) {
+    warn() {
+        const val = this.valtoString.apply(this, arguments);
         this.genericLogger('warn', val);
     }
-    error(val) {
+    error() {
+        const val = this.valtoString.apply(this, arguments);
         this.genericLogger('error', val);
     }
     clear() {
