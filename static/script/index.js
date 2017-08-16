@@ -98,6 +98,9 @@ class ScreenConsole {
         if (!this.$console) {
             return false;
         }
+        if (this._options.isShow) {
+            return true;
+        }
         this._options.isShow = true;
         const consoleDOM = document.querySelector('.console');
         if (!consoleDOM) {
@@ -121,6 +124,9 @@ class ScreenConsole {
      * @memberof ScreenConsole
      */
     consoleHide() {
+        if (!this._options.isShow) {
+            return false;
+        }
         this._options.isShow = false;
         this.$console.style.display = 'none';
         this.$consoleVirtualList = '';
