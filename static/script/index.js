@@ -105,19 +105,14 @@ class ScreenConsole {
             this.$console.innerHTML = this.$consoleVirtualList;
         } else {
             this.$console.style.display = 'block';
-        }
-    }
-
-
-    /**
-     * @description 用来切换滚动状态的方法
-     * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
-     * @returns 
-     * @memberof ScreenConsole
-     */
-    scrollToggle() {
-        this._options.isScrollToBack = !this._options.isScrollToBack;
-        return this._options.isScrollToBack;
+            const hideContent = this.createDOM({
+                tag: 'div',
+                css: `width:300px;`,
+            })
+            hideContent.innerHTML = this.$consoleVirtualList;
+            this.$consoleVirtualList = '';
+            this.appendDOM(hideContent, this.$console);
+        };
     }
 
     /**
@@ -130,6 +125,18 @@ class ScreenConsole {
         this.$console.style.display = 'none';
         this.$consoleVirtualList = '';
     }
+
+    /**
+     * @description 用来切换滚动状态的方法
+     * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
+     * @returns 
+     * @memberof ScreenConsole
+     */
+    scrollToggle() {
+        this._options.isScrollToBack = !this._options.isScrollToBack;
+        return this._options.isScrollToBack;
+    }
+
 
 
     /**
@@ -162,7 +169,17 @@ class ScreenConsole {
      * @returns 
      * @memberof ScreenConsole
      */
-    createDOM({ tag, css = 'width:300px;position:fixed;top:0;right:0;max-height:500px;min-height:200px;overflow-y:scroll;background:rgba(0,0,0,0.7);', className = '' }) {
+    createDOM({
+        tag,
+        css = `width:300px;
+               position:fixed;
+               top:0;right:0;
+               max-height:500px;
+               min-height:200px;
+               overflow-y:auto;
+               background:rgba(0,0,0,0.7);`,
+        className = ''
+    }) {
         let element = document.createElement(tag);
         // 添加css样式
         element.style.cssText = css;
@@ -232,11 +249,6 @@ class ScreenConsole {
     log(val) {
         this.genericLogger('log', val);
     }
-    clear() {
-        // 清除掉控制台的dom和虚拟的
-        this.$consoleVirtualList = '';
-        this.$console.innerHTML = '';
-    }
     info(val) {
         this.genericLogger('info', val);
     }
@@ -245,6 +257,11 @@ class ScreenConsole {
     }
     error(val) {
         this.genericLogger('error', val);
+    }
+    clear() {
+        // 清除掉控制台的dom和虚拟的
+        this.$consoleVirtualList = '';
+        this.$console.innerHTML = '';
     }
 
 
