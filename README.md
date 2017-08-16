@@ -27,6 +27,9 @@ In this way, the plugin can be used.
 ```javascript
 
 // Create an instance.
+// There is a default options,you can change the color, show, and scroll.
+
+
 window.screenConsole = new ScreenConsole();
 // Init the instance.
 screenConsole.init();
@@ -72,4 +75,25 @@ window.c.removeEvent();
 
 // Finally, you must know that the instance can only be instantiated once.But you can remove the DOM, through the destroy function.
 screenConsole.destroy();
+```
+### APIs
+
+```javascript
+
+init(options);
+consoleShow();
+consoleHide();
+
+log(msg);
+warn(msg);
+error(msg);
+info();
+
+clear(msg);
+destroy();
+
+// Proxy the keydown or click events.
+// And return a instance of the events,you can use removeEvent to remove
+proxyPress(type, rule, callback);
+instantOfProxyPress.removeEvent();
 ```

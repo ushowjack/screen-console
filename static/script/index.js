@@ -8,7 +8,8 @@ import proxyPress from './base/proxyPress';
  *         infoColor: 'blue',
  *         warnColor: 'orange',
  *         errorColor: 'red',
- *         isShow: false
+ *         isShow: false,
+ *         isScrollToBack: false
  *     }] 
  * @memberof ScreenConsole
  */
@@ -16,10 +17,11 @@ import proxyPress from './base/proxyPress';
 class ScreenConsole {
     constructor(options = {
         logColor: 'lightgreen',
-        infoColor: 'blue',
-        warnColor: 'orange',
+        infoColor: 'yellow',
+        warnColor: 'white',
         errorColor: 'red',
-        isShow: false
+        isShow: false,
+        isScrollToBack: false
     }) {
         if (typeof ScreenConsole.instance === 'object') {
             return ScreenConsole.instance;
@@ -106,6 +108,18 @@ class ScreenConsole {
         }
     }
 
+
+    /**
+     * @description 用来切换滚动状态的方法
+     * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
+     * @returns 
+     * @memberof ScreenConsole
+     */
+    scrollToggle() {
+        this._options.isScrollToBack = !this._options.isScrollToBack;
+        return this._options.isScrollToBack;
+    }
+
     /**
      * @description 对console进行隐藏并且设置状态值
      * @author USHOW JACK, EMAIL: ushowjack@GMail.com.
@@ -186,13 +200,31 @@ class ScreenConsole {
         }
         if (this._options.isShow) {
             const $logger = document.createElement('div');
-            $logger.style.cssText = `color:${this._options[type+"Color"]};min-height:30px;line-height:20px;width:100%;box-sizing:border-box;word-wrap:break-word;border-bottom: 1px solid white;padding:5px;`;
+            $logger.style.cssText = `color:${this._options[type+"Color"]};
+                                    min-height:30px;
+                                    line-height:20px;
+                                    width:100%;
+                                    box-sizing:border-box;
+                                    word-wrap:break-word;
+                                    border-bottom: 1px solid white;
+                                    padding:5px;`;
             $logger.textContent = text;
             this.appendDOM($logger, this.$console);
             // 自动滚动到底部
-            this.$console.scrollTop = this.$console.scrollHeight - this.$console.clientHeight;
+            if (this._options.isScrollToBack) {
+                this.$console.scrollTop = this.$console.scrollHeight - this.$console.clientHeight;
+            }
         } else {
-            this.$consoleVirtualList += `<div style="color:${this._options[type+'Color']};min-height:30px;line-height:20px;width:100%;box-sizing:border-box;word-wrap:break-word;border-bottom: 1px solid white;padding:5px;">${text}</div>`
+            this.$consoleVirtualList += `<div style="color:${this._options[type+'Color']};
+                                                     min-height:30px;
+                                                     line-height:20px;
+                                                     width:100%;
+                                                     box-sizing:border-box;
+                                                     word-wrap:break-word;
+                                                     border-bottom: 1px solid white;
+                                                     padding:5px;">
+                                            ${text}
+                                         </div>`
         }
     }
 
