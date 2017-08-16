@@ -92,7 +92,7 @@ class ScreenConsole {
     }
 
     // To add the log exports.
-    extendsExport(fn) {
+    extendsExports(fn) {
         const _self = this;
         // Prevent function self-reference
         const genericLogger = this.genericLogger.bind(this);

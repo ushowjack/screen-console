@@ -33,7 +33,13 @@ In this way, the plugin can be used.
 window.screenConsole = new ScreenConsole();
 // Init the instance.
 screenConsole.init();
-// You can use the all functions of window.console.
+// You can use the extendsExports api to do something like add exports when you want to log.
+// But you should remenber don't use the console[xxx] at all.
+screenConsole.extendsExports(()=>{
+    alert('hello');
+});
+
+// You can use the all functions of window.console and now you can use the arguments. 
 screenConsole.log(1);
 screenConsole.error(1);
 screenConsole.info(1);
@@ -92,6 +98,8 @@ info();
 scrollToggle();
 clear(msg);
 destroy();
+
+extendsExports(callback);
 
 // Proxy the keydown or click events.
 // And return a instance of the events,you can use removeEvent to remove
