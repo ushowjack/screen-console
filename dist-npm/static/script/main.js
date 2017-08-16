@@ -1,0 +1,1 @@
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}var _index=require("./index"),_index2=_interopRequireDefault(_index);window.ScreenConsole=_index2.default;

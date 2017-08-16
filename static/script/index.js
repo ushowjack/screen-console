@@ -122,7 +122,7 @@ class ScreenConsole {
             this.$console.style.display = 'block';
             const hideContent = this.createDOM({
                 tag: 'div',
-                css: `width:300px;`,
+                css: `width:500px;`,
             })
             hideContent.innerHTML = this.$consoleVirtualList;
             this.$consoleVirtualList = '';
@@ -190,7 +190,7 @@ class ScreenConsole {
      */
     createDOM({
         tag,
-        css = `width:300px;
+        css = `width:500px;
                position:fixed;
                top:0;right:0;
                max-height:500px;
@@ -235,7 +235,7 @@ class ScreenConsole {
             return false;
         }
         if (this._options.isShow) {
-            const $logger = document.createElement('div');
+            const $logger = document.createElement('pre');
             $logger.style.cssText = `color:${this._options[type+"Color"]};
                                     min-height:30px;
                                     line-height:20px;
@@ -251,7 +251,7 @@ class ScreenConsole {
                 this.$console.scrollTop = this.$console.scrollHeight - this.$console.clientHeight;
             }
         } else {
-            this.$consoleVirtualList += `<div style="color:${this._options[type+'Color']};
+            this.$consoleVirtualList += `<pre style="color:${this._options[type+'Color']};
                                                      min-height:30px;
                                                      line-height:20px;
                                                      width:100%;
@@ -260,7 +260,7 @@ class ScreenConsole {
                                                      border-bottom: 1px solid white;
                                                      padding:5px;">
                                             ${text}
-                                         </div>`
+                                         </pre>`
         }
     }
 
@@ -269,7 +269,7 @@ class ScreenConsole {
     valtoString(val) {
         let text = ''
         for (let i = 0; i < arguments.length; i++) {
-            typeof arguments[i] == 'object' ? text += JSON.stringify(arguments[i]) : text += arguments[i];
+            typeof arguments[i] == 'object' ? text += JSON.stringify(arguments[i], null, 2) : text += arguments[i];
         }
         return text;
     }

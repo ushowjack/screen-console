@@ -1,31 +1,43 @@
 {
-    "name": "webpack",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack --config webpack.config.js --color --progress",
-        "dev": "webpack-dev-server --open --inline --hot --env.development",
-        "watch": "webpack --watch"
-    },
-    "author": "UShow Jack",
-    "license": "ISC",
-    "devDependencies": {
-        "babel-core": "^6.25.0",
-        "babel-loader": "^7.1.1",
-        "babel-preset-env": "^1.6.0",
-        "clean-webpack-plugin": "^0.1.16",
-        "css-loader": "^0.28.4",
-        "extract-text-webpack-plugin": "^3.0.0",
-        "file-loader": "^0.11.2",
-        "html-webpack-plugin": "^2.29.0",
-        "less": "^2.7.2",
-        "less-loader": "^4.0.5",
-        "source-map-loader": "^0.2.1",
-        "style-loader": "^0.18.2",
-        "url-loader": "^0.5.9",
-        "webpack": "^3.4.0",
-        "webpack-dev-server": "^2.6.1"
-    }
+  "name": "screen-console",
+  "description": "",
+  "main": "dist-npm/static/script/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js --color --progress",
+    "dev": "webpack-dev-server --open --inline --hot --env.development",
+    "watch": "webpack --watch"
+  },
+  "author": "UShow Jack",
+  "email": "ushowjack@gmail.com",
+  "version": "1.0.8",
+  "github": "https://github.com/ushowjack/screen-console.git",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-changed": "^2.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-uglify": "^2.1.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.4.0",
+    "webpack-dev-server": "^2.6.1"
+  },
+  "dependencies": {
+    "screen-console": "^1.0.8"
+  }
 }
