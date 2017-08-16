@@ -32,7 +32,14 @@ In this way, the plugin can be used.
 
 window.screenConsole = new ScreenConsole();
 // Init the instance.
-screenConsole.init();
+window.screenConsole = new ScreenConsole({
+		logColor: 'lightgreen',
+        infoColor: 'yellow',
+        warnColor: 'white',
+        errorColor: 'red',
+        isShow: true,
+        isScrollToBack: true
+});
 // You can use the extendsExports api to do something like add exports when you want to log.
 // But you should remenber don't use the console[xxx] at all.
 screenConsole.extendsExports(()=>{
